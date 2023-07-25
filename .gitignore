@@ -1,4 +1,4 @@
 .idea/
 .vs/
-/JWT/bin/
-/JWT/obj/
+*/bin/
+*/obj/
