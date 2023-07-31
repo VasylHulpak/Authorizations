@@ -21,7 +21,7 @@ In its compact form, JSON Web Tokens consist of three parts separated by dots (.
 * Signature
 Therefore, a JWT typically looks like the following.
 
-```
+```json
 xxxxx.yyyyy.zzzzz
 ```
 
@@ -31,7 +31,7 @@ The header typically consists of two parts: the type of the token, which is JWT,
 
 For example:
 
-```
+```json
 {
     "alg": "HS256",
     "typ": "JWT"
@@ -48,7 +48,7 @@ Private claims: These are the custom claims created to share information between
 
 An example payload could be:
 
-```sh
+```json
 {
     "sub": "1234567890",
     "name": "John Doe",
@@ -63,8 +63,8 @@ Do note that for signed tokens this information, though protected against tamper
 To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
 
 For example if you want to use the HMAC SHA256 algorithm, the signature will be created in the following way:
-sh
-```
+
+```sh
 HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret)
 ```
 The signature is used to verify the message wasn't changed along the way, and, in the case of tokens signed with a private key, it can also verify that the sender of the JWT is who it says it is.
@@ -80,7 +80,7 @@ In authentication, when the user successfully logs in using their credentials, a
 You also should not store sensitive session data in browser storage due to lack of security.
 
 Whenever the user wants to access a protected route or resource, the user agent should send the JWT, typically in the Authorization header using the Bearer schema. The content of the header should look like the following:
-```
+```sh
 Authorization: Bearer <token>
 ```
 MIT Licensed

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWT", "JWT\JWT.csproj", "{7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicAuthenticationWebApi", "BasicAuthenticationWebApi\BasicAuthenticationWebApi.csproj", "{538BEB06-181E-4914-A699-CFA21DF3F13E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth2", "Auth2\Auth2.csproj", "{55022ACB-D9AC-4AE2-9463-006CE8BF8249}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{538BEB06-181E-4914-A699-CFA21DF3F13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{538BEB06-181E-4914-A699-CFA21DF3F13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{538BEB06-181E-4914-A699-CFA21DF3F13E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55022ACB-D9AC-4AE2-9463-006CE8BF8249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55022ACB-D9AC-4AE2-9463-006CE8BF8249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55022ACB-D9AC-4AE2-9463-006CE8BF8249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55022ACB-D9AC-4AE2-9463-006CE8BF8249}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
