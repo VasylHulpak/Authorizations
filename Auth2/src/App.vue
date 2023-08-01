@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import lvButton from 'lightvue/button'
 
-function loginPleaseSign() {
-  let domain = 'public.pleasesign.com.au/oauth'
+async function loginPleaseSign() {
+  let domain = 'private.pleasesign.com.au/oauth'
   let client_id = 'ea80517bd7aacb26f6ad7c0904e1c900'
-  let code_challenge = 'xv38n6K5bfRftBcnJP5IFpIDzbrF0E2oTI1x2Ep575w'
+  let code_challenge = 'PleaseSign' + Date.now()
+  
   let redirect_uri = 'http://localhost:5173/callback/'
-  let state = '79560a1e48e74acc0049f94030628b40154e32cf98c77b4d'
   
   let loginUrl = `https://${domain}/authorize?
     response_type=code&
     code_challenge=${code_challenge}&
     code_challenge_method=S256&
     client_id=${client_id}&
-    redirect_uri=${redirect_uri}&
-    state=${state}`
+    redirect_uri=${redirect_uri}`
   
   const popup = window.open(loginUrl, "oauth", "width=800,height=800");
   window.addEventListener("storage", async () => {
