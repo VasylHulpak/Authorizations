@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  light-icons:
+    specifier: ^1.0.10
+    version: 1.0.10
   lightvue:
     specifier: ^1.5.1
     version: 1.5.1
@@ -578,6 +581,10 @@ packages:
   /kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
     dev: true
+
+  /light-icons@1.0.10:
+    resolution: {integrity: sha512-EBB6iexm7JEceMxP1C1FjKaezzxkZFdRNP/J/TEl/kLPNjhTbvsVkGJkWgBdX3Cpzw0KThlfml4RJi2Mybr+mA==}
+    dev: false
 
   /lightvue@1.5.1:
     resolution: {integrity: sha512-Au6oL6cS9mT7AjU/DT9F1ee0Ecb8aXQcjC5Bxs5BxsznKXzr5cIpxJDY44JjIhEhEzTM2KzjUdxPrEPhPIfgsg==}

@@ -9,12 +9,28 @@ namespace Auth2.Helpers
 		{
 			services.AddHttpClient("pleaseSign", client =>
 			{
-				client.BaseAddress = new Uri(options.GetValue<string>("TokenAPI"), UriKind.Absolute);
+				client.BaseAddress = new Uri(options.GetValue<string>("Url")!, UriKind.Absolute);
 
 				client.DefaultRequestHeaders.Add("X-PLEASESIGN-KEY", options.GetValue<string>("ClientId"));
 				client.DefaultRequestHeaders.Add("X-PLEASESIGN-SECRET", options.GetValue<string>("ClientSecret"));
 
 				client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Base64Encode($"{options.GetValue<string>("ClientId")}:{options.GetValue<string>("ClientSecret")}"));
+			});
+		}
+
+		public static void AddInstagramHttpClient(this IServiceCollection services, IConfigurationSection options)
+		{
+			services.AddHttpClient("instagram", client =>
+			{
+				client.BaseAddress = new Uri(options.GetValue<string>("Url")!, UriKind.Absolute);
+			});
+		}
+
+		public static void AddLinkedInHttpClient(this IServiceCollection services, IConfigurationSection options)
+		{
+			services.AddHttpClient("linkedIn", client =>
+			{
+				client.BaseAddress = new Uri(options.GetValue<string>("Url")!, UriKind.Absolute);
 			});
 		}
 

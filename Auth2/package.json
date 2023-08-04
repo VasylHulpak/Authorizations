@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "light-icons": "^1.0.10",
     "lightvue": "^1.5.1",
     "vue": "^3.3.4",
     "vue-router": "4"
