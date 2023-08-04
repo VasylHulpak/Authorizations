@@ -1,6 +1,11 @@
+using System.Net;
+using System.Net.Http.Headers;
 using Auth2.Helpers;
 using Auth2.Options;
 using Auth2.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +14,26 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var auth = builder.Services.AddAuthentication(options =>
+{
+	options.DefaultScheme = IdentityConstants.ApplicationScheme;
+	options.DefaultChallengeScheme = "github";
+});
+
+auth.AddCookie(IdentityConstants.ApplicationScheme, opt =>
+{
+	opt.LoginPath = "/api/auth/logIn";
+	opt.
+});
+auth.AddGitHub("github", options =>
+{
+	options.ClientId = "80b6dfafa4828f62176e";
+	options.ClientSecret = "797323350210f1350f991e4e3363118ecde012e0";
+	options.Events.OnCreatingTicket += context =>
+	{
+		return Task.CompletedTask;
+	};
+});
 
 builder.Services.AddScoped<IGithubService, GithubService>();
 builder.Services.AddScoped<IPleaseSignService, PleaseSignService>();
@@ -40,6 +65,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
