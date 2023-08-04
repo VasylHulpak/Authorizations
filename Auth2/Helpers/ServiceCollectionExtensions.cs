@@ -9,7 +9,7 @@ namespace Auth2.Helpers
 		{
 			services.AddHttpClient("pleaseSign", client =>
 			{
-				client.BaseAddress = new Uri(options.GetValue<string>("Url")!, UriKind.Absolute);
+				client.BaseAddress = new Uri(options.GetValue<string>("Domain")!, UriKind.Absolute);
 
 				client.DefaultRequestHeaders.Add("X-PLEASESIGN-KEY", options.GetValue<string>("ClientId"));
 				client.DefaultRequestHeaders.Add("X-PLEASESIGN-SECRET", options.GetValue<string>("ClientSecret"));
@@ -22,7 +22,7 @@ namespace Auth2.Helpers
 		{
 			services.AddHttpClient("instagram", client =>
 			{
-				client.BaseAddress = new Uri(options.GetValue<string>("Url")!, UriKind.Absolute);
+				client.BaseAddress = new Uri(options.GetValue<string>("Domain")!, UriKind.Absolute);
 			});
 		}
 
@@ -30,7 +30,7 @@ namespace Auth2.Helpers
 		{
 			services.AddHttpClient("linkedIn", client =>
 			{
-				client.BaseAddress = new Uri(options.GetValue<string>("Url")!, UriKind.Absolute);
+				client.BaseAddress = new Uri(options.GetValue<string>("Domain")!, UriKind.Absolute);
 			});
 		}
 

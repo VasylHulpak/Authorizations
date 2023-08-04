@@ -1,6 +1,7 @@
-﻿namespace Auth2.Services;
-
-public interface ILinkedinService
+﻿namespace Auth2.Services
 {
+	public interface ILinkedinService
+	{
 	
+	}
 }

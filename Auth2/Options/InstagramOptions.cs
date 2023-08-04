@@ -1,6 +1,7 @@
-﻿namespace Auth2.Options;
-
-public class InstagramOptions
+﻿namespace Auth2.Options
 {
+	public class InstagramOptions
+	{
 	
+	}
 }

@@ -1,6 +1,7 @@
-﻿namespace Auth2.Services;
-
-public class InstagramService : IInstagramService
+﻿namespace Auth2.Services
 {
+	public class InstagramService : IInstagramService
+	{
 
+	}
 }

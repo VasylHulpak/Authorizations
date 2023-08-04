@@ -1,6 +1,7 @@
-﻿namespace Auth2.Options;
-
-public class LinkedInOptions
+﻿namespace Auth2.Options
 {
+	public class LinkedInOptions
+	{
 	
+	}
 }

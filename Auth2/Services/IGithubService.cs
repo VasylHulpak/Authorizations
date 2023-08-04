@@ -1,6 +1,6 @@
-﻿namespace Auth2.Services;
-
-public interface IGithubService
+﻿namespace Auth2.Services
 {
-	
+	public interface IGithubService
+	{
+	}
 }
