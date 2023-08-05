@@ -1,13 +1,42 @@
 <script setup lang="ts">
 import lvButton from 'lightvue/button'
+import axios   from 'axios'
 
-function loginPleaseSign() { }
+async function loginPleaseSign() {
+  await axios
+  .get('https://https://localhost:5001/api/auth/LogInWith', {
+    params: {
+      schema: 'pleaseSign'
+    }
+  });
+}
 
-function loginMicrosoft() { }
+async function loginMicrosoft() {
+  await axios
+  .get('https://https://localhost:5001/api/auth/LogInWith', {
+    params: {
+      schema: 'microsoft'
+    }
+  });
+}
 
-function loginLinkedin() { }
+async function loginLinkedin() {
+  await axios
+  .get('https://https://localhost:5001/api/auth/LogInWith', {
+    params: {
+      schema: 'linkedIn'
+    }
+  });
+}
 
-function loginInstagram() { }
+async function loginInstagram() {
+  await axios
+  .get('https://https://localhost:5001/api/auth/LogInWith', {
+    params: {
+      schema: 'instagram'
+    }
+  });
+}
 </script>
 
 <template>
