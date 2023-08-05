@@ -1,17 +1,9 @@
-using System.Net;
-using System.Net.Http.Headers;
-using Auth2.Helpers;
-using Auth2.Options;
-using Auth2.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var auth = builder.Services.AddAuthentication(options =>
@@ -22,38 +14,52 @@ var auth = builder.Services.AddAuthentication(options =>
 
 auth.AddCookie(IdentityConstants.ApplicationScheme, opt =>
 {
-	opt.LoginPath = "/api/auth/logIn";
-	opt.
+	opt.LoginPath = "/api/Auth/LoggedIn";
+	opt.Cookie.Name = "CookieESignature";
 });
+
 auth.AddGitHub("github", options =>
 {
 	options.ClientId = "80b6dfafa4828f62176e";
 	options.ClientSecret = "797323350210f1350f991e4e3363118ecde012e0";
-	options.Events.OnCreatingTicket += context =>
-	{
-		return Task.CompletedTask;
-	};
+	
+	options.Scope.Add("user:email");
+	options.CallbackPath = "/api/Auth/LoggedIn";
 });
 
-builder.Services.AddScoped<IGithubService, GithubService>();
-builder.Services.AddScoped<IPleaseSignService, PleaseSignService>();
-builder.Services.AddScoped<ILinkedinService, LinkedinService>();
-builder.Services.AddScoped<IInstagramService, InstagramService>();
+auth.AddInstagram("instagram", options =>
+{
+	options.ClientId = "77eglcyglemv63";
+	options.ClientSecret = "6QKJECcDLxYKoH6Y";
+});
 
-// Options
-var pleaseSignOptions = builder.Configuration.GetSection("PleaseSign");
-var linkedinOptions = builder.Configuration.GetSection("Linkedin");
-var instagramOptions = builder.Configuration.GetSection("Instagram");
+auth.AddInstagram("linkedIn", options =>
+{
+	options.ClientId = "77eglcyglemv63";
+	options.ClientSecret = "6QKJECcDLxYKoH6Y";
+});
 
-builder.Services.Configure<PleaseSignOptions>(pleaseSignOptions);
-builder.Services.Configure<LinkedInOptions>(linkedinOptions);
-builder.Services.Configure<InstagramOptions>(instagramOptions);
+auth.AddOAuth("docuSign", options =>
+{
+	options.ClientId = "";
+	options.ClientSecret = "";
+	
+	options.AuthorizationEndpoint = "https://account-d.docusign.com/oauth/auth";
+	options.TokenEndpoint = "https://account-d.docusign.com/oauth/token";
+	options.CallbackPath = "/api/Auth/LoggedIn";
+});
 
-//Http clients
-builder.Services.AddPleaseSignHttpClient(pleaseSignOptions);
-builder.Services.AddInstagramHttpClient(instagramOptions);
-builder.Services.AddLinkedInHttpClient(linkedinOptions);
-
+auth.AddOAuth("pleaseSign", options =>
+{
+	options.ClientId = "";
+	options.ClientSecret = "";
+	
+	options.Scope.Add("business");
+	
+	options.AuthorizationEndpoint = "https://private.pleasesign.com.au/oauth/authorize";
+	options.TokenEndpoint = "https://private.pleasesign.com.au/oauth/token";
+	options.CallbackPath = "/api/Auth/LoggedIn";
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
