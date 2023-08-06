@@ -11,6 +11,15 @@ async function loginPleaseSign() {
   });
 }
 
+async function loginGitHub() {
+  await axios
+  .get('https://https://localhost:5001/api/auth/LogInWith', {
+    params: {
+      schema: 'github'
+    }
+  });
+}
+
 async function loginMicrosoft() {
   await axios
   .get('https://https://localhost:5001/api/auth/LogInWith', {
@@ -74,6 +83,15 @@ async function loginInstagram() {
         class="instagram-btn border-1px border-blue border-solid h-40px p-6px w-240px"
         @click="loginInstagram"
         icon="light-icon-brand-instagram"
+    />
+
+    <lvButton
+        :outline="true"
+        label="Authorise with GitHub"
+        type="button"
+        class="bg-black text-white border-1px border-white border-solid h-40px p-6px w-240px"
+        @click="loginGitHub"
+        icon="light-icon-brand-github"
     />
   </div>
 </template>

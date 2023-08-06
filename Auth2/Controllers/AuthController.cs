@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Auth2.Controllers
@@ -14,27 +13,19 @@ namespace Auth2.Controllers
 		{
 			if (!User.Identity.IsAuthenticated)
 			{
-				return Challenge(new AuthenticationProperties()
+				return Challenge(new AuthenticationProperties
 				{
-					RedirectUri = "/api/Auth/LoggedIn"
+					RedirectUri = "/"
 				}, schema);
 			}
 			return new ChallengeResult();
 		}
 
 		[HttpGet]
-		[Authorize()]
 		[Route("LoggedIn")]
 		public string LoggedIn()
 		{
-			return "Logged in";
-		}
-
-		[HttpGet]
-		[Route("callback")]
-		public string callback()
-		{
-			return "Logged in";
+			return "Logged in with" + User.Identity.AuthenticationType;
 		}
 	}
 }
