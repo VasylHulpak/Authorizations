@@ -4,7 +4,7 @@ import axios   from 'axios'
 
 async function loginPleaseSign() {
   await axios
-  .get('https://https://localhost:5001/api/auth/LogInWith', {
+  .get('https://localtest.me:5250/api/auth/LogInWith', {
     params: {
       schema: 'pleaseSign'
     }
@@ -13,7 +13,7 @@ async function loginPleaseSign() {
 
 async function loginGitHub() {
   await axios
-  .get('https://https://localhost:5001/api/auth/LogInWith', {
+  .get('https://localtest.me:5250/api/auth/LogInWith', {
     params: {
       schema: 'github'
     }
@@ -22,7 +22,7 @@ async function loginGitHub() {
 
 async function loginMicrosoft() {
   await axios
-  .get('https://https://localhost:5001/api/auth/LogInWith', {
+  .get('https://localtest.me:5250/api/auth/LogInWith', {
     params: {
       schema: 'microsoft'
     }
@@ -31,7 +31,7 @@ async function loginMicrosoft() {
 
 async function loginLinkedin() {
   await axios
-  .get('https://https://localhost:5001/api/auth/LogInWith', {
+  .get('https://localtest.me:52501/api/auth/LogInWith', {
     params: {
       schema: 'linkedIn'
     }
@@ -40,7 +40,7 @@ async function loginLinkedin() {
 
 async function loginInstagram() {
   await axios
-  .get('https://https://localhost:5001/api/auth/LogInWith', {
+  .get('https://localtest.me:5250/api/auth/LogInWith', {
     params: {
       schema: 'instagram'
     }

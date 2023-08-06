@@ -1,5 +1,5 @@
 <template>
-  <div>Callback, {{window.location.href)}}</div>
+  <div>Callback, {{window.location.href}}</div>
 </template>
 
 <script setup lang="ts">

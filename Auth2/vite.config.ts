@@ -13,10 +13,10 @@ export default defineConfig({
 			}
 		})
 	],
-	port: 3000,
+	port: 5250,
 	proxy: {
 		'^(/api)': {
-			target: 'https://localhost:5001/',
+			target: 'https://localtest.me:5250/',
 			changeOrigin: true,
 			secure: false,
 			ws: true

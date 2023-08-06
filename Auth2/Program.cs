@@ -1,7 +1,6 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,18 +21,16 @@ auth.AddCookie(IdentityConstants.ApplicationScheme, opt =>
 
 auth.AddGitHub("github", options =>
 {
-	options.CallbackPath = "/api/Auth/LoggedIn";
 	options.ClientId = "80b6dfafa4828f62176e";
 	options.ClientSecret = "f3e3b2db60418cad049df8484d75bcb911b32058";
-	options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
-	options.TokenEndpoint = "https://github.com/login/oauth/access_tokenn";
-	options.UserInformationEndpoint = "https://api.github.com/user";
-	
-	options.Scope.Add("user:email");
 	options.SaveTokens = true;
 	
 	options.Events = new OAuthEvents
 	{
+		OnRemoteFailure = async context =>
+		{
+			var res = context.Result;
+		},
 		OnCreatingTicket = async context =>
 		{
 			var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
@@ -89,7 +86,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
