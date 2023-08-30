@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Auth2.Controllers
@@ -11,21 +12,66 @@ namespace Auth2.Controllers
 		[Route("LogInWith")]
 		public ActionResult LogInWith(string schema)
 		{
-			if (!User.Identity.IsAuthenticated)
+			return Challenge(new AuthenticationProperties
 			{
-				return Challenge(new AuthenticationProperties
-				{
-					RedirectUri = "/"
-				}, schema);
-			}
-			return new ChallengeResult();
+				RedirectUri = "/api/auth/response",
+			}, schema);
 		}
 
+		[HttpGet]
+		[Authorize]
+		[Route("github-response")]
+		public async Task<IActionResult> GithubResponse()
+		{
+			// var result = await HttpContext.AuthenticateAsync("github");
+ 		//
+			// var claims = result.Principal.Identities
+			// 	.FirstOrDefault().Claims.Select(claim => new
+			// 	{
+			// 		claim.Issuer,
+			// 		claim.OriginalIssuer,
+			// 		claim.Type,
+			// 		claim.Value
+			// 	});
+ 		//
+			return Redirect("/api/auth/response");
+		}
+
+		[HttpGet]
+		[Authorize]
+		[Route("response")]
+		public string response()
+		{
+			// var result = await HttpContext.AuthenticateAsync("github");
+			//
+			// var claims = result.Principal.Identities
+			// 	.FirstOrDefault().Claims.Select(claim => new
+			// 	{
+			// 		claim.Issuer,
+			// 		claim.OriginalIssuer,
+			// 		claim.Type,
+			// 		claim.Value
+			// 	});
+			//
+			return "User was authorized with " + HttpContext.User.Identity.AuthenticationType + " schema";
+		}
+		
+		
+		[HttpGet]
+		[Route("callback-pleaseSign")]
+		public string CallbackPleaseSign()
+		{
+			var r = HttpContext.User;
+			return "Please authorize";
+		}
+		
+		
 		[HttpGet]
 		[Route("LoggedIn")]
 		public string LoggedIn()
 		{
-			return "Logged in with" + User.Identity.AuthenticationType;
+			return "Please authorize";
 		}
 	}
+
 }
