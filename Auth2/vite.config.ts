@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, UserConfigExport } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import WindiCSS from 'vite-plugin-windicss'
 
@@ -8,19 +8,19 @@ export default defineConfig({
 		vue(),
 		WindiCSS({
 			scan: {
-				dirs: ['.'], // all files in the cwd
-				fileExtensions: ['vue', 'js', 'ts'] // also enabled scanning for js/ts
+				dirs: ['.'], 
+				fileExtensions: ['vue', 'js', 'ts'] 
 			}
 		})
 	],
-	port: 5250,
+	port: 3000,
 	proxy: {
 		'^(/api)': {
-			target: 'https://localtest.me:5250/',
+			target: 'https://localhost:5001/',
 			changeOrigin: true,
 			secure: false,
 			ws: true
 		}
 	},
 	open: true
-})
+} as UserConfigExport)

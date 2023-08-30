@@ -1,48 +1,12 @@
 <script setup lang="ts">
 import lvButton from 'lightvue/button'
-import axios   from 'axios'
+import axios from 'axios'
 
-async function loginPleaseSign() {
+async function login(schema: string) {
   await axios
-  .get('https://localtest.me:5250/api/auth/LogInWith', {
+  .get('https://localhost:5001/api/auth/LogInWith', {
     params: {
-      schema: 'pleaseSign'
-    }
-  });
-}
-
-async function loginGitHub() {
-  await axios
-  .get('https://localtest.me:5250/api/auth/LogInWith', {
-    params: {
-      schema: 'github'
-    }
-  });
-}
-
-async function loginMicrosoft() {
-  await axios
-  .get('https://localtest.me:5250/api/auth/LogInWith', {
-    params: {
-      schema: 'microsoft'
-    }
-  });
-}
-
-async function loginLinkedin() {
-  await axios
-  .get('https://localtest.me:52501/api/auth/LogInWith', {
-    params: {
-      schema: 'linkedIn'
-    }
-  });
-}
-
-async function loginInstagram() {
-  await axios
-  .get('https://localtest.me:5250/api/auth/LogInWith', {
-    params: {
-      schema: 'instagram'
+      schema: schema
     }
   });
 }
@@ -51,18 +15,11 @@ async function loginInstagram() {
 <template>
   <div class="grid gap-20px text-center justify-center p-100px relative">
     <lvButton
-        label="Authorise with PleaseSign"
-        type="button"
-        class="bg-orange text-white border-1px border-white border-solid h-40px p-6px w-240px"
-        @click="loginPleaseSign"
-        icon="light-icon-brand-pleasesign"
-    />
-    <lvButton
         :outline="true"
-        label="Authorise with Gmail"
+        label="Authorise with Github"
         type="button"
         class="bg-white text-blue border-1px border-blue border-solid h-40px p-6px w-240px"
-        @click="loginMicrosoft"
+        @click="login('github')"
         icon="light-icon-mail"
     />
 
@@ -71,7 +28,7 @@ async function loginInstagram() {
         label="Authorise with Linkedin"
         type="button"
         class="bg-blue text-white border-1px border-white border-solid h-40px p-6px w-240px"
-        @click="loginLinkedin"
+        @click="login('linkedIn')"
         icon="light-icon-brand-linkedin"
         
     />
@@ -81,17 +38,8 @@ async function loginInstagram() {
         label="Authorise with Instagram"
         type="button"
         class="instagram-btn border-1px border-blue border-solid h-40px p-6px w-240px"
-        @click="loginInstagram"
+        @click="login('instagram')"
         icon="light-icon-brand-instagram"
-    />
-
-    <lvButton
-        :outline="true"
-        label="Authorise with GitHub"
-        type="button"
-        class="bg-black text-white border-1px border-white border-solid h-40px p-6px w-240px"
-        @click="loginGitHub"
-        icon="light-icon-brand-github"
     />
   </div>
 </template>

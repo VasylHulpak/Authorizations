@@ -1,5 +1,6 @@
 using System.Net.Http.Headers;
 using System.Text.Json;
+using Auth2.Options;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
@@ -19,14 +20,22 @@ auth.AddCookie(IdentityConstants.ApplicationScheme, opt =>
 	opt.LoginPath = "/api/Auth/LoggedIn";
 });
 
+var instagramOptions = builder.Configuration.GetSection("Instagram");
+var githubOptions = builder.Configuration.GetSection("Github");
+var linkedinOptions = builder.Configuration.GetSection("Linkedin");
+
+builder.Services.Configure<InstagramOptions>(instagramOptions);
+builder.Services.Configure<GithubOptions>(githubOptions);
+builder.Services.Configure<LinkedinOptions>(linkedinOptions);
+
 auth.AddGitHub("github", options =>
 {
-	options.ClientId = "80b6dfafa4828f62176e";
-	options.ClientSecret = "f3e3b2db60418cad049df8484d75bcb911b32058";
+	options.ClientId = githubOptions.GetValue<string>("ClientId")!;
+	options.ClientSecret = githubOptions.GetValue<string>("ClientSecret")!;
 	options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
 	options.TokenEndpoint = "https://github.com/login/oauth/access_token";
 	options.UserInformationEndpoint = "https://api.github.com/user";
-	options.CallbackPath = "/signin-github";
+	options.CallbackPath = githubOptions.GetValue<string>("Callback");
 	
 	options.Events = new OAuthEvents
 	{
@@ -45,16 +54,16 @@ auth.AddGitHub("github", options =>
 
 auth.AddInstagram("instagram", options =>
 {
-	options.ClientId = "77eglcyglemv63";
-	options.ClientSecret = "6QKJECcDLxYKoH6Y";
-	options.CallbackPath = "/signin-instagram";
+	options.ClientId = instagramOptions.GetValue<string>("ClientId")!;
+	options.ClientSecret = instagramOptions.GetValue<string>("ClientSecret")!;
+	options.CallbackPath = instagramOptions.GetValue<string>("Callback");
 });
 
 auth.AddInstagram("linkedIn", options =>
 {
-	options.ClientId = "77eglcyglemv63";
-	options.ClientSecret = "6QKJECcDLxYKoH6Y";
-	options.CallbackPath = "/signin-linkedin";
+	options.ClientId = linkedinOptions.GetValue<string>("ClientId")!;
+	options.ClientSecret = linkedinOptions.GetValue<string>("ClientSecret")!;
+	options.CallbackPath = linkedinOptions.GetValue<string>("Callback");
 });
 
 var app = builder.Build();
