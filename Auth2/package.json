@@ -11,7 +11,7 @@
   "dependencies": {
     "light-icons": "^1.0.10",
     "lightvue": "^1.5.1",
-    "axios": "^1.4.0",
+    "axios": "^1.6.0",
     "vue": "^3.3.4",
     "vue-router": "4"
   },
